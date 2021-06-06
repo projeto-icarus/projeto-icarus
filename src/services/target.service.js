@@ -55,6 +55,27 @@ const TargetService = {
       stars: parseNestedList(document, "div.category-group", "h3"),
     };
   },
+  new: async () => {
+    const document = await getDocument(`${TargetService.host}/new`);
+
+    return {
+      videos: parseVideos(document),
+    };
+  },
+  popular: async () => {
+    const document = await getDocument(`${TargetService.host}/popular`);
+
+    return {
+      videos: parseVideos(document),
+    };
+  },
+  rating: async () => {
+    const document = await getDocument(`${TargetService.host}/rating`);
+
+    return {
+      videos: parseVideos(document),
+    };
+  },
 };
 
 export default TargetService;

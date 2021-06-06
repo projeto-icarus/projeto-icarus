@@ -1,7 +1,23 @@
+import Layout from "../components/Layout";
 import TargetService from "../services/target.service";
+import Image from "next/image";
+import styles from "../styles/Index.module.scss";
 
 const Home = ({ data }) => {
-  return <div></div>;
+  console.log(data);
+  return (
+    <Layout>
+      <div className="container-fluid">
+        <div className={styles.mainCategories}>
+          {data.mainCategories.map((cat) => (
+            <div className={styles.category}>
+              <Image {...cat.img} width="288px" height="162px" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </Layout>
+  );
 };
 
 export default Home;

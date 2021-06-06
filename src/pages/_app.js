@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import ThemeWrapper from "../../styles/ThemeWrapper";
+import ThemeWrapper from "../styles/ThemeWrapper";
+import AlertDialog from "../components/AlertDialog";
 
 export default function Icarus(props) {
   const { Component, pageProps } = props;
@@ -25,6 +26,7 @@ export default function Icarus(props) {
         />
       </Head>
       <ThemeWrapper>
+        <AlertDialog />
         <CssBaseline />
         <Component {...pageProps} />
       </ThemeWrapper>

@@ -27,6 +27,13 @@ a {
   height: 20px !important;
 }
 
+.DebugPanel {
+  zoom: .7;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 ul {
   list-style: none;
   padding: 0;

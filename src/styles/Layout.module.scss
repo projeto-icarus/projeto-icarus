@@ -12,3 +12,15 @@
 .orientation {
   width: 365px;
 }
+
+.navbar {
+  margin-bottom: 20px;
+  
+  .navBarItem div {
+    cursor: pointer !important;
+  }
+
+  .navBarItem:not(:last-child) {
+    margin-right: 10px;
+  }
+}

@@ -10,12 +10,11 @@ import general from "../config/general";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSettings } from "../store/actions/settings";
 import { DARK_MODE } from "../store/reducers/settings";
+import useBlinder from "../hooks/useBlinder";
 
 function Icarus(props) {
   const { Component, pageProps } = props;
-  const { blindSiteTitle, blindFavicon } = useSelector(
-    (state) => state.settings
-  );
+  const blinder = useBlinder();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,18 +37,18 @@ function Icarus(props) {
   return (
     <React.Fragment>
       <Head>
-        <title>{blindSiteTitle ? "Projeto Icarus" : general.siteName}</title>
+        <title>
+          {blinder(general.siteName, "siteTitle", "Projeto Icarus")}
+        </title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
-        {!blindFavicon && (
-          <link
-            rel="icon"
-            type="image/png"
-            href={`/assets/logos/${general.keyName}/logo.png`}
-          />
-        )}
+        <link
+          rel="icon"
+          type="image/png"
+          href={blinder(`/assets/logos/${general.keyName}/logo.png`, "favicon")}
+        />
       </Head>
       <ThemeWrapper>
         <AlertDialog />

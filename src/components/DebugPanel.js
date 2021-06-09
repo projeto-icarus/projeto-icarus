@@ -101,45 +101,47 @@ const DebugPanel = () => {
 
   return (
     <div className="container mt-2">
-      <Button onClick={toggleBlindMode}>Toggle Blind Mode</Button>
-      {(blindSiteTitle ||
-        blindSiteLogo ||
-        blindFavicon ||
-        blindImages ||
-        blindTitles) && (
-        <>
-          <Switch
-            label="blindSiteTitle"
-            checked={blindSiteTitle}
-            name="blindSiteTitle"
-            onChange={changeBlindSwitch}
-          />
-          <Switch
-            label="blindSiteLogo"
-            checked={blindSiteLogo}
-            name="blindSiteLogo"
-            onChange={changeBlindSwitch}
-          />
-          <Switch
-            label="blindFavicon"
-            checked={blindFavicon}
-            name="blindFavicon"
-            onChange={changeBlindSwitch}
-          />
-          <Switch
-            label="blindImages"
-            checked={blindImages}
-            name="blindImages"
-            onChange={changeBlindSwitch}
-          />
-          <Switch
-            label="blindTitles"
-            checked={blindTitles}
-            name="blindTitles"
-            onChange={changeBlindSwitch}
-          />
-        </>
-      )}
+      <div className="DebugPanel">
+        <Button onClick={toggleBlindMode}>Toggle Blind Mode</Button>
+        {(blindSiteTitle ||
+          blindSiteLogo ||
+          blindFavicon ||
+          blindImages ||
+          blindTitles) && (
+          <>
+            <Switch
+              label="blindSiteTitle"
+              checked={blindSiteTitle}
+              name="blindSiteTitle"
+              onChange={changeBlindSwitch}
+            />
+            <Switch
+              label="blindSiteLogo"
+              checked={blindSiteLogo}
+              name="blindSiteLogo"
+              onChange={changeBlindSwitch}
+            />
+            <Switch
+              label="blindFavicon"
+              checked={blindFavicon}
+              name="blindFavicon"
+              onChange={changeBlindSwitch}
+            />
+            <Switch
+              label="blindImages"
+              checked={blindImages}
+              name="blindImages"
+              onChange={changeBlindSwitch}
+            />
+            <Switch
+              label="blindTitles"
+              checked={blindTitles}
+              name="blindTitles"
+              onChange={changeBlindSwitch}
+            />
+          </>
+        )}
+      </div>
     </div>
   );
 };

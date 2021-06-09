@@ -4,11 +4,11 @@ import React from "react";
 import lorem from "../faker/lorem";
 import styles from "../styles/NestedList.module.scss";
 
-const NestedList = ({ blindTitles, groups, title, mt, button }) => {
+const NestedList = ({ blinder, groups, title, keyName, mt, button }) => {
   return (
     <Box component="section" mt={mt} className={styles.nestedList}>
       <Typography variant="h5" component="h2" className="sectionTitle">
-        {blindTitles ? lorem() : title}
+        {blinder(title, "titles")}
       </Typography>
       <div className={styles.nestedListListing}>
         {groups.map((_group) => (
@@ -16,13 +16,22 @@ const NestedList = ({ blindTitles, groups, title, mt, button }) => {
             className={styles.nestedListGroup}
             key={_group.groupTitle + title}
           >
-            <Typography variant="h6" component="h3">
-              {blindTitles ? lorem(1, 1) : _group.groupTitle}
-            </Typography>
+            {keyName && (
+              <a href={`#${keyName}-${_group.groupTitle}`}>
+                <Typography variant="h6" component="h3">
+                  {blinder(_group.groupTitle, "titles")}
+                </Typography>
+              </a>
+            )}
+            {!keyName && (
+              <Typography variant="h6" component="h3">
+                {blinder(_group.groupTitle, "titles")}
+              </Typography>
+            )}
             {_group.items.map((_item) => (
               <Link key={_item.title} href={_item.url}>
                 <a className={styles.nestedListItem} title={_item.title}>
-                  {blindTitles ? lorem() : _item.title.replace(" ♂", "")}
+                  {blinder(_item.title.replace(" ♂", ""), "titles")}
                   {_item.title.includes(" ♂") && (
                     <Icon className={styles.icon}>male</Icon>
                   )}
@@ -43,7 +52,7 @@ const NestedList = ({ blindTitles, groups, title, mt, button }) => {
           <Link href={button.href}>
             <a>
               <Button variant="outlined" color="primary">
-                {blindTitles ? lorem() : button.label}
+                {blinder(button.label, "titles")}
               </Button>
             </a>
           </Link>

@@ -5,18 +5,17 @@ import Link from "next/link";
 import styles from "../styles/Index.module.scss";
 import { Chip, Icon, Typography } from "@material-ui/core";
 import NestedList from "../components/NestedList";
-import { useSelector } from "react-redux";
-import lorem from "../faker/lorem";
+import useBlinder from "../hooks/useBlinder";
 
 const Home = ({ data, debugMode }) => {
-  const { blindImages, blindTitles } = useSelector((state) => state.settings);
+  const blinder = useBlinder();
 
   return (
     <Layout debugMode={debugMode}>
       <div className="container">
         <section className={styles.mainCategories}>
           <Typography variant="h5" component="h2" className="sectionTitle">
-            {blindTitles ? lorem() : "Principais categorias"}
+            {blinder("Principais categorias", "titles")}
           </Typography>
           <div className={styles.mainCategoriesList}>
             {data.mainCategories.map((cat) => (
@@ -25,7 +24,7 @@ const Home = ({ data, debugMode }) => {
                   <div key={cat.title} className={styles.category}>
                     <div className={styles.chipHolder}>
                       <Image
-                        className={blindImages ? "blind-image" : ""}
+                        className={blinder("", "images", "blind-image")}
                         {...cat.img}
                         width="288px"
                         height="162px"
@@ -38,7 +37,7 @@ const Home = ({ data, debugMode }) => {
                       />
                     </div>
                     <Typography variant="body2" component="h3">
-                      {blindTitles ? lorem() : cat.title}
+                      {blinder(cat.title, "titles")}
                     </Typography>
                   </div>
                 </a>
@@ -48,7 +47,7 @@ const Home = ({ data, debugMode }) => {
         </section>
         <NestedList
           mt={4}
-          blindTitles={blindTitles}
+          blinder={blinder}
           groups={data.popularCategories}
           title="Categorias mais populares"
           button={{
@@ -58,7 +57,7 @@ const Home = ({ data, debugMode }) => {
         />
         <NestedList
           mt={4}
-          blindTitles={blindTitles}
+          blinder={blinder}
           groups={data.popularPornstars}
           title="Estrelas Pornô mais populares"
           button={{

@@ -13,12 +13,6 @@ const ThemeWrapper = ({ children }) => {
       ...themeSchema,
       palette: {
         ...themeSchema.palette,
-        primary: {
-          main: themeSchema.palette.secondary.main,
-        },
-        secondary: {
-          main: themeSchema.palette.primary.main,
-        },
         type: "dark",
       },
     },

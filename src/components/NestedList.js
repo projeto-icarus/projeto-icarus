@@ -1,15 +1,28 @@
 import { Box, Button, Chip, Icon, Typography } from "@material-ui/core";
 import Link from "next/link";
 import React from "react";
-import lorem from "../faker/lorem";
 import styles from "../styles/NestedList.module.scss";
 
-const NestedList = ({ blinder, groups, title, keyName, mt, button }) => {
+const NestedList = ({ blinder, groups, title, keyName, mt, button, index }) => {
   return (
     <Box component="section" mt={mt} className={styles.nestedList}>
       <Typography variant="h5" component="h2" className="sectionTitle">
         {blinder(title, "titles")}
       </Typography>
+      {index && (
+        <div className={styles.categoryIndex}>
+          {groups.map((_group) => (
+            <Button
+              variant="contained"
+              className={styles.btnCategoryIndex}
+              key={_group.groupTitle + "button"}
+              href={`#${keyName}-${_group.groupTitle}`}
+            >
+              {_group.groupTitle}
+            </Button>
+          ))}
+        </div>
+      )}
       <div className={styles.nestedListListing}>
         {groups.map((_group) => (
           <div
@@ -17,9 +30,12 @@ const NestedList = ({ blinder, groups, title, keyName, mt, button }) => {
             key={_group.groupTitle + title}
           >
             {keyName && (
-              <a href={`#${keyName}-${_group.groupTitle}`}>
+              <a
+                id={`${keyName}-${_group.groupTitle}`}
+                href={`#${keyName}-${_group.groupTitle}`}
+              >
                 <Typography variant="h6" component="h3">
-                  {blinder(_group.groupTitle, "titles")}
+                  {blinder(_group.groupTitle, "titles", false, 0, 1)}
                 </Typography>
               </a>
             )}
@@ -29,7 +45,7 @@ const NestedList = ({ blinder, groups, title, keyName, mt, button }) => {
               </Typography>
             )}
             {_group.items.map((_item) => (
-              <Link key={_item.title} href={_item.url}>
+              <Link key={_item.title + _item.url} href={_item.url}>
                 <a className={styles.nestedListItem} title={_item.title}>
                   {blinder(_item.title.replace(" ♂", ""), "titles")}
                   {_item.title.includes(" ♂") && (

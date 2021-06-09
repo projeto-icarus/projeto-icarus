@@ -1,74 +1,7 @@
-import Layout from "../components/Layout";
+import HomeScreen from "../components/screens/HomeScreen";
 import TargetService from "../services/target.service";
-import Image from "next/image";
-import Link from "next/link";
-import styles from "../styles/Index.module.scss";
-import { Chip, Icon, Typography } from "@material-ui/core";
-import NestedList from "../components/NestedList";
-import useBlinder from "../hooks/useBlinder";
 
-const Home = ({ data, debugMode }) => {
-  const blinder = useBlinder();
-
-  return (
-    <Layout debugMode={debugMode}>
-      <div className="container">
-        <section className={styles.mainCategories}>
-          <Typography variant="h5" component="h2" className="sectionTitle">
-            {blinder("Principais categorias", "titles")}
-          </Typography>
-          <div className={styles.mainCategoriesList}>
-            {data.mainCategories.map((cat) => (
-              <Link key={cat.title + "mainCategory"} href={cat.url}>
-                <a>
-                  <div key={cat.title} className={styles.category}>
-                    <div className={styles.chipHolder}>
-                      <Image
-                        className={blinder("", "images", "blind-image")}
-                        {...cat.img}
-                        width="288px"
-                        height="162px"
-                      />
-                      <Chip
-                        className={styles.total}
-                        icon={<Icon>ondemand_video</Icon>}
-                        size="small"
-                        label={cat.total}
-                      />
-                    </div>
-                    <Typography variant="body2" component="h3">
-                      {blinder(cat.title, "titles")}
-                    </Typography>
-                  </div>
-                </a>
-              </Link>
-            ))}
-          </div>
-        </section>
-        <NestedList
-          mt={4}
-          blinder={blinder}
-          groups={data.popularCategories}
-          title="Categorias mais populares"
-          button={{
-            label: "Todas as categorias",
-            href: "/categories",
-          }}
-        />
-        <NestedList
-          mt={4}
-          blinder={blinder}
-          groups={data.popularPornstars}
-          title="Estrelas Pornô mais populares"
-          button={{
-            label: "Todas as estrelas pornô",
-            href: "/stars",
-          }}
-        />
-      </div>
-    </Layout>
-  );
-};
+const Home = HomeScreen;
 
 export default Home;
 

@@ -5,11 +5,16 @@ import {
   parseCategories,
   parseNestedList,
 } from "../utils/scrapper.utils";
+import queryString from "query-string";
 
 const TargetService = {
   host: process.env.TARGET_HOST,
-  index: async () => {
-    const document = await getDocument(TargetService.host);
+  index: async (query) => {
+    let qs = "";
+    if (query) {
+      qs = "?" + queryString.stringify(query);
+    }
+    const document = await getDocument(TargetService.host + qs);
 
     return {
       mainCategories: parseCategories(document),
@@ -31,8 +36,12 @@ const TargetService = {
       relatedCategories: parseRelatedCollections(document),
     };
   },
-  categories: async () => {
-    const document = await getDocument(`${TargetService.host}/a-z`);
+  categories: async (query) => {
+    let qs = "";
+    if (query) {
+      qs = "?" + queryString.stringify(query);
+    }
+    const document = await getDocument(`${TargetService.host}/a-z${qs}`);
 
     return {
       categories: parseNestedList(document, "div.category-group", "h3"),
@@ -48,8 +57,12 @@ const TargetService = {
       relatedStars: parseRelatedCollections(document),
     };
   },
-  stars: async () => {
-    const document = await getDocument(`${TargetService.host}/pornstar`);
+  stars: async (query) => {
+    let qs = "";
+    if (query) {
+      qs = "?" + queryString.stringify(query);
+    }
+    const document = await getDocument(`${TargetService.host}/pornstar${qs}`);
 
     return {
       stars: parseNestedList(document, "div.category-group", "h3"),

@@ -44,13 +44,17 @@ export const parseRelatedCollections = (document) =>
     url: relCat
       .querySelector("a")
       .href.replace("/cat/", "/category/")
-      .replace("/pornstar/", "/star/"),
+      .replace("/pornstar/", "/star/")
+      .split("?")[0],
   }));
 
 export const parseCategories = (document) =>
   [...document.querySelectorAll("#content div.card")].map((cat) => ({
     title: cat.querySelector(".card-title").textContent.trim(),
-    url: cat.querySelector("a").href.replace("/cat/", "/category/"),
+    url: cat
+      .querySelector("a")
+      .href.replace("/cat/", "/category/")
+      .split("?")[0],
     total: cat.querySelector(".total").textContent.trim(),
     img: {
       src: cat.querySelector("img").src,
@@ -72,7 +76,10 @@ export const parseNestedList = (
       url: popCatItem
         .querySelector("a")
         .href.replace("/cat/", "/category/")
-        .replace("/pornstar/", "/star/"),
+        .replace("/pornstar/", "/star/")
+        .replace("/pornstar-gay/", "/star/")
+        .replace("/pornstar-trans/", "/star/")
+        .split("?")[0],
       total: popCatItem.querySelector("span").textContent.trim(),
     })),
   }));

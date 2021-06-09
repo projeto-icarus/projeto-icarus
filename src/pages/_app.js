@@ -4,9 +4,19 @@ import Head from "next/head";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import ThemeWrapper from "../styles/ThemeWrapper";
 import AlertDialog from "../components/AlertDialog";
+import { storeWrapper } from "../store";
+import "../styles/global.css";
+import general from "../config/general";
+import { useDispatch, useSelector } from "react-redux";
+import { updateSettings } from "../store/actions/settings";
+import { DARK_MODE } from "../store/reducers/settings";
 
-export default function Icarus(props) {
+function Icarus(props) {
   const { Component, pageProps } = props;
+  const { blindSiteTitle, blindFavicon } = useSelector(
+    (state) => state.settings
+  );
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // Remove the server-side injected CSS.
@@ -14,16 +24,32 @@ export default function Icarus(props) {
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
+
+    if (typeof window !== "undefined") {
+      const localThemeMode = localStorage.getItem(DARK_MODE);
+      dispatch(
+        updateSettings({
+          darkMode: localThemeMode ? localThemeMode === "true" : true,
+        })
+      );
+    }
   }, []);
 
   return (
     <React.Fragment>
       <Head>
-        <title>My page</title>
+        <title>{blindSiteTitle ? "Projeto Icarus" : general.siteName}</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
+        {!blindFavicon && (
+          <link
+            rel="icon"
+            type="image/png"
+            href={`/assets/logos/${general.keyName}/logo.png`}
+          />
+        )}
       </Head>
       <ThemeWrapper>
         <AlertDialog />
@@ -38,3 +64,5 @@ Icarus.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.object.isRequired,
 };
+
+export default storeWrapper.withRedux(Icarus);

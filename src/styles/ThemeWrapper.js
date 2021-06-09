@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { ptBR } from "@material-ui/core/locale";
-import PubSub from "pubsub-js";
 
 import themeSchema from "./theme";
-
-const TOGGLE_THEME_TOPIC = "TOGGLE_THEME_TOPIC";
-
-export const toggleTheme = () => PubSub.publish(TOGGLE_THEME_TOPIC, "");
+import { useSelector } from "react-redux";
 
 const ThemeWrapper = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(true);
+  const { darkMode } = useSelector((state) => state.settings);
 
   const darkTheme = createMuiTheme(
     {
@@ -30,16 +26,6 @@ const ThemeWrapper = ({ children }) => {
   );
 
   const lightTheme = createMuiTheme(themeSchema, ptBR);
-
-  useEffect(() => {
-    const token = PubSub.subscribe(TOGGLE_THEME_TOPIC, () =>
-      setDarkMode((dm) => !dm)
-    );
-
-    return () => {
-      PubSub.unsubscribe(token);
-    };
-  }, []);
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>

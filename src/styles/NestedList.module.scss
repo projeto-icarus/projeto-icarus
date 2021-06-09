@@ -1,0 +1,21 @@
+
+.nestedListGroup{
+  .total {
+    margin-left: 10px;
+  }
+  // will-change: transform;
+}
+
+.nestedListGroup:not(:first-child) {
+  margin-top: 30px;
+}
+
+.nestedListListing {
+  columns: 300px 5;
+}
+
+.nestedListItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}

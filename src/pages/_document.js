@@ -2,7 +2,6 @@ import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
 import theme from "../styles/theme";
-import general from "../config/general";
 
 export default class MyDocument extends Document {
   render() {
@@ -11,7 +10,6 @@ export default class MyDocument extends Document {
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <link rel="stylesheet" href="/assets/styles/index.css" />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
@@ -19,11 +17,6 @@ export default class MyDocument extends Document {
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            href={`/assets/logos/${general.keyName}/logo.png`}
           />
         </Head>
         <body>

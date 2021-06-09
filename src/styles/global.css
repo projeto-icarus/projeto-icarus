@@ -1,3 +1,32 @@
+.blind-image {
+  -webkit-filter: blur(40px);
+  filter: blur(40px);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sectionTitle {
+  margin-bottom: 15px !important;
+  font-weight: 500 !important;
+}
+
+.MuiChip-iconSmall {
+  font-size: 1.11em !important;
+  margin-left: 6px !important;
+}
+
+.MuiChip-labelSmall {
+  font-size: 7pt !important;
+  font-weight: 500;
+}
+
+.MuiChip-sizeSmall {
+  height: 20px !important;
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -2820,12 +2849,12 @@ html {
 }
 .container {
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 30px;
+  padding-left: 30px;
   margin-right: auto;
   margin-left: auto;
 }
-@media (min-width: 576px) {
+/* @media (min-width: 576px) {
   .container {
     max-width: 540px;
   }
@@ -2840,9 +2869,14 @@ html {
     max-width: 960px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1300px) {
   .container {
-    max-width: 1140px;
+    max-width: 1150px;
+  }
+} */
+@media (min-width: 1500px) {
+  .container {
+    max-width: 1450px;
   }
 }
 .container-fluid {

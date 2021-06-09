@@ -1,4 +1,3 @@
-import general from "../config/general";
 import {
   getDocument,
   parseVideos,
@@ -8,7 +7,7 @@ import {
 } from "../utils/scrapper.utils";
 
 const TargetService = {
-  host: general.targetHost,
+  host: process.env.TARGET_HOST,
   index: async () => {
     const document = await getDocument(TargetService.host);
 

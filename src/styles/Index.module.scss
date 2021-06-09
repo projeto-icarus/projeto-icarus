@@ -1,5 +1,38 @@
-.mainCategories {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.mainCategoriesList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (min-width: 1300px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .category {
+
+    img {
+      border-radius: 5px;
+    }
+    
+    .chipHolder {
+      position: relative;
+      
+      .total {
+        position: absolute;
+        bottom: 10px;
+        left: 5px;
+      }
+    }
+
+    h3 {
+      font-weight: 500;
+    }
+  }
 }
